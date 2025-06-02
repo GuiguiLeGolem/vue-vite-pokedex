@@ -10,6 +10,13 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+  proxy: {
+    '/pokeapi/': {
+      target: 'http://localhost:3000',
+      changeOrigin: true,
+      rewrite: path => path.replace(/^\/pokeapi\//, '')
+    }
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
