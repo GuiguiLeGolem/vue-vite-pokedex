@@ -41,11 +41,13 @@ const starshipStore = reactive({
 })
 
 onMounted(async () => {
-  const data = await fetch('https://www.swapi.tech/api/starships/').then(res => res.json())
+  //const data = await fetch('https://www.swapi.tech/api/starships/').then(res => res.json())
   
-  //console.log(data.results)
+  const helloFetch = await fetch('/.netlify/functions/starship').then(response => response.json())
 
-  const promises = data.results.map(async element => {
+  console.log({ helloFetch })
+
+  const promises = helloFetch.results.map(async element => {
     const detail = await fetch(element.url).then(res => res.json())
     return detail.result.properties
   })
